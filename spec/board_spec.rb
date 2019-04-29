@@ -22,4 +22,18 @@ RSpec.describe TicTacToe::Board do
     
     expect(updated_board.cells).to eq(expected_board.cells)
   end
+
+  it 'can tell if it is full' do
+    board = TicTacToe::Board.new
+    expect(board.full?).to be_falsy
+
+    board = TicTacToe::Board.new(state: ["X","O","X","O","X","O","X","O","X"])
+    expect(board.full?).to be_truthy
+  end
+
+  it 'can return an array of available positions' do
+    board = TicTacToe::Board.new(state: [nil, nil, "X", nil, "O", nil, "X", nil, nil])
+
+    expect(board.available_cells).to eq([0,1,3,5,7,8])
+  end
 end

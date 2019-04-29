@@ -10,4 +10,12 @@ class TicTacToe::Board
     new_state[cell] = token
     self.class.new(state: new_state)
   end
+  
+  def full?
+    self.cells.compact.length == self.cells.length
+  end
+
+  def available_cells
+    self.cells.map.with_index{ |cell, i| i if !cell }.compact
+  end
 end
