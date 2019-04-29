@@ -13,4 +13,13 @@ RSpec.describe TicTacToe::Board do
     state = [nil, nil, "X", nil, "O", nil, "X", nil, nil]
     expect(TicTacToe::Board.new(state: state).cells).to eq(state)
   end
+
+  it 'can return an updated board' do
+    state = [nil, nil, "X", nil, "O", nil, "X", nil, nil]
+    board = TicTacToe::Board.new(state: [nil, nil, "X", nil, "O", nil, "X", nil, nil])
+    updated_board = board.update(8, "X")
+    expected_board = TicTacToe::Board.new(state: [nil, nil, "X", nil, "O", nil, "X", nil, "X"])
+    
+    expect(updated_board.cells).to eq(expected_board.cells)
+  end
 end
