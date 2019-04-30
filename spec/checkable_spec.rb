@@ -1,5 +1,9 @@
 require 'spec_helper'
 
+class MockCheckableExtender
+  extend TicTacToe::Checkable
+end
+
 RSpec.describe TicTacToe::Checkable do
   [
     [0, 1, 2, "top row"],
@@ -15,27 +19,27 @@ RSpec.describe TicTacToe::Checkable do
       cells = Array.new(9)
       cells[first], cells[second], cells[third] = "X", "X", "X"
       
-      expect(TicTacToe::Checkable.won?(cells)).to be_truthy
+      expect(MockCheckableExtender.won?(cells)).to be_truthy
     end
   end
 
   it "returns a falsy value when there is not a win" do
     cells = [nil, nil, "X", nil, "O", nil, "X", nil, nil]
 
-    expect(TicTacToe::Checkable.won?(cells)).to be_falsy
+    expect(MockCheckableExtender.won?(cells)).to be_falsy
   end
 
   it "can check for a cat's game" do
     cells = ["X", "O", "X", "X", "O", "X", "O", "X", "O"]
 
-    expect(TicTacToe::Checkable.cats_game?(cells)).to be_truthy
+    expect(MockCheckableExtender.cats_game?(cells)).to be_truthy
   end
 
   it "can check if the game is over" do
     cells = ["X", "O", nil, "X", "X", nil, "O", "O", "X"]
-    expect(TicTacToe::Checkable.over?(cells)).to be_truthy
+    expect(MockCheckableExtender.over?(cells)).to be_truthy
 
     cells = ["X", "O", "X", "X", "O", "X", "O", "X", "O"]
-    expect(TicTacToe::Checkable.over?(cells)).to be_truthy
+    expect(MockCheckableExtender.over?(cells)).to be_truthy
   end
 end
