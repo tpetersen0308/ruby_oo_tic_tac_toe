@@ -1,10 +1,11 @@
 class TicTacToe::HumanPlayer < TicTacToe::Player
-  def initialize(token, ui: nil)
+  include TicTacToe::IO::Getable
+  
+  def initialize(token)
     super(token)
-    @ui = ui
   end
 
   def move
-    @ui.get_input
+    get_move
   end
 end
