@@ -1,30 +1,30 @@
 module TicTacToe::Checkable
-  def self.won?(board)
-    check_row_win(board) || check_column_win(board) || check_diagonal_win(board)
+  def self.won?(cells)
+    check_row_win(cells) || check_column_win(cells) || check_diagonal_win(cells)
   end
 
-  def self.cats_game?(board)
-    board.compact.length == board.length && !won?(board)
+  def self.cats_game?(cells)
+    cells.compact.length == cells.length && !won?(cells)
   end
 
   private
-    def self.check_row_win(board)
-      rows = get_rows(board)
+    def self.check_row_win(cells)
+      rows = get_rows(cells)
       check_combos(rows)
     end
 
-    def self.check_column_win(board)
-      columns = get_columns(board)
+    def self.check_column_win(cells)
+      columns = get_columns(cells)
       check_combos(columns)
     end
 
-    def self.check_diagonal_win(board)
-      row_size = Math.sqrt(board.size)
+    def self.check_diagonal_win(cells)
+      row_size = Math.sqrt(cells.size)
       nw_to_se_cells = (0..(row_size - 1).to_i).map do |n|
-        board[n * row_size + n]
+        cells[n * row_size + n]
       end
       sw_to_ne_cells = (0..(row_size - 1).to_i).map do |n|
-        board[n * (row_size - 1) + 2]
+        cells[n * (row_size - 1) + 2]
       end
 
       check_combos([nw_to_se_cells, sw_to_ne_cells])
@@ -36,12 +36,12 @@ module TicTacToe::Checkable
       end
     end
 
-    def self.get_rows(board)
-      row_size = Math.sqrt(board.size)
-      board.each_slice(row_size).to_a
+    def self.get_rows(cells)
+      row_size = Math.sqrt(cells.size)
+      cells.each_slice(row_size).to_a
     end
 
-    def self.get_columns(board)
-      get_rows(board).transpose
+    def self.get_columns(cells)
+      get_rows(cells).transpose
     end
 end

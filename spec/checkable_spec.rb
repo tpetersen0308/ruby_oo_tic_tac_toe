@@ -12,22 +12,22 @@ RSpec.describe TicTacToe::Checkable do
     [2, 4, 6, "SW to NE diagonal"]
   ].each do |first, second, third, desc|
     it "can check for a #{desc} win" do
-      board = Array.new(9)
-      board[first], board[second], board[third] = "X", "X", "X"
+      cells = Array.new(9)
+      cells[first], cells[second], cells[third] = "X", "X", "X"
       
-      expect(TicTacToe::Checkable.won?(board)).to be_truthy
+      expect(TicTacToe::Checkable.won?(cells)).to be_truthy
     end
   end
 
   it "returns a falsy value when there is not a win" do
-    board = [nil, nil, "X", nil, "O", nil, "X", nil, nil]
+    cells = [nil, nil, "X", nil, "O", nil, "X", nil, nil]
 
-    expect(TicTacToe::Checkable.won?(board)).to be_falsy
+    expect(TicTacToe::Checkable.won?(cells)).to be_falsy
   end
 
   it "can check for a cat's game" do
-    board = ["X", "O", "X", "X", "O", "X", "O", "X", "O"]
-    
-    expect(TicTacToe::Checkable.cats_game?(board)).to be_truthy
+    cells = ["X", "O", "X", "X", "O", "X", "O", "X", "O"]
+
+    expect(TicTacToe::Checkable.cats_game?(cells)).to be_truthy
   end
 end
