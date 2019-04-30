@@ -8,4 +8,8 @@ class TicTacToe::HumanPlayer < TicTacToe::Player
   def move
     get_move
   end
+
+  def human?
+    true
+  end
 end

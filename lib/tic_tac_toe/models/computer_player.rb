@@ -6,4 +6,8 @@ class TicTacToe::ComputerPlayer < TicTacToe::Player
   def move(available_cells)
     available_cells.sample
   end
+
+  def human?
+    false
+  end
 end
