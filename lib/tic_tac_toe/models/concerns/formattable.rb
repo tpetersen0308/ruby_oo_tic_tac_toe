@@ -7,6 +7,10 @@ module TicTacToe::Formattable
     formatted_rows.join("\n" + "-"*formatted_rows.first.size + "\n")
   end
 
+  def format_move(input)
+    input.to_i.to_s == input ? input.to_i - 1 : input
+  end
+
   private
     def format_cells(cells)
       cells.map.with_index{|cell, i| (cell || (i + 1).to_s).center(3)}
