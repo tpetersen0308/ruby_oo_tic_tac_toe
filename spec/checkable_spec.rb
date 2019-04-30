@@ -24,4 +24,10 @@ RSpec.describe TicTacToe::Checkable do
 
     expect(TicTacToe::Checkable.won?(board)).to be_falsy
   end
+
+  it "can check for a cat's game" do
+    board = ["X", "O", "X", "X", "O", "X", "O", "X", "O"]
+    
+    expect(TicTacToe::Checkable.cats_game?(board)).to be_truthy
+  end
 end

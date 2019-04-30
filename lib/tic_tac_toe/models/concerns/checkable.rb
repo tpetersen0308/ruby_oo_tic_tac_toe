@@ -3,6 +3,10 @@ module TicTacToe::Checkable
     check_row_win(board) || check_column_win(board) || check_diagonal_win(board)
   end
 
+  def self.cats_game?(board)
+    board.compact.length == board.length && !won?(board)
+  end
+
   private
     def self.check_row_win(board)
       rows = get_rows(board)
