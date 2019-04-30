@@ -7,6 +7,10 @@ module TicTacToe::Checkable
     cells.compact.length == cells.length && !won?(cells)
   end
 
+  def self.over?(cells)
+    won?(cells) || cats_game?(cells)
+  end
+
   private
     def self.check_row_win(cells)
       rows = get_rows(cells)

@@ -30,4 +30,12 @@ RSpec.describe TicTacToe::Checkable do
 
     expect(TicTacToe::Checkable.cats_game?(cells)).to be_truthy
   end
+
+  it "can check if the game is over" do
+    cells = ["X", "O", nil, "X", "X", nil, "O", "O", "X"]
+    expect(TicTacToe::Checkable.over?(cells)).to be_truthy
+
+    cells = ["X", "O", "X", "X", "O", "X", "O", "X", "O"]
+    expect(TicTacToe::Checkable.over?(cells)).to be_truthy
+  end
 end
