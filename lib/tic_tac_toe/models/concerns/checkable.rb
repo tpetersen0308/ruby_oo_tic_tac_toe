@@ -16,6 +16,10 @@ module TicTacToe::Checkable
     cells.each_slice(row_size).to_a
   end
 
+  def available_cells(cells)
+    cells.map.with_index{ |cell, i| i if !cell }.compact
+  end
+
   private
     def check_row_win(cells)
       rows = get_rows(cells)

@@ -42,4 +42,10 @@ RSpec.describe TicTacToe::Checkable do
     cells = ["X", "O", "X", "X", "O", "X", "O", "X", "O"]
     expect(MockCheckableExtender.over?(cells)).to be_truthy
   end
+
+  it 'can return an array of available positions' do
+    cells = [nil, nil, "X", nil, "O", nil, "X", nil, nil]
+
+    expect(MockCheckableExtender.available_cells(cells)).to eq([0,1,3,5,7,8])
+  end
 end

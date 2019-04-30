@@ -1,10 +1,9 @@
 class TicTacToe::ComputerPlayer < TicTacToe::Player
-  def initialize(token, board_reader: nil)
+  def initialize(token)
     super(token)
-    @board_reader = board_reader
   end
   
-  def move
-    @board_reader.available_cells.sample
+  def move(available_cells)
+    available_cells.sample
   end
 end

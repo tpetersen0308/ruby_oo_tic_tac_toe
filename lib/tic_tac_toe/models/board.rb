@@ -14,8 +14,4 @@ class TicTacToe::Board
   def full?
     self.cells.compact.length == self.cells.length
   end
-
-  def available_cells
-    self.cells.map.with_index{ |cell, i| i if !cell }.compact
-  end
 end
