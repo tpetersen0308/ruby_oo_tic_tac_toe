@@ -10,16 +10,18 @@ class TicTacToe::Game
   end
 
   def turn
-    move = current_player.move
+    if current_player.human?
+      print_board(board.cells)
+      print_message("It is #{current_player.token}'s turn:\n>>")
+      move = current_player.move
+    else
+      move = current_player.move(available_cells(board.cells))
+    end
     new_board = board.update(move, current_player.token)
     self.class.new(new_board, [next_player, current_player])
   end
   
   def play
-    if current_player.class == TicTacToe::HumanPlayer
-      print_board(board.cells)
-      print_message("It is #{current_player.token}'s turn:\n>>")
-    end
     game = turn
     return game if game.over?(game.board.cells)
     game.play
