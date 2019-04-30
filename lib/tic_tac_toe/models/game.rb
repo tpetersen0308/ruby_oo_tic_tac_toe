@@ -2,6 +2,7 @@ class TicTacToe::Game
   attr_reader :board, :current_player, :next_player
   include TicTacToe::Checkable
   include TicTacToe::IO::Printable
+  include TicTacToe::Validateable
 
   def initialize(board, players)
     @board = board
@@ -11,12 +12,12 @@ class TicTacToe::Game
 
   def turn
     if current_player.human?
-      print_board(board.cells)
-      print_message("It is #{current_player.token}'s turn:\n>>")
       move = current_player.move
+      return self.turn unless validate_input(move, available_cells(board.cells))[:is_valid]
     else
       move = current_player.move(available_cells(board.cells))
     end
+
     new_board = board.update(move, current_player.token)
     self.class.new(new_board, [next_player, current_player])
   end
