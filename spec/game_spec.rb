@@ -6,6 +6,10 @@ RSpec.describe TicTacToe::Game do
     @output = TicTacToe::IO::Printable
     @human = TicTacToe::HumanPlayer
     @board = TicTacToe::Board
+    @game_modules = {
+      game_status: TicTacToe::Checkable,
+      validator: TicTacToe::Validateable
+    }
   end
 
   describe "Human vs. Human game" do
@@ -16,7 +20,7 @@ RSpec.describe TicTacToe::Game do
   
     it 'can execute a turn' do
       board = @board.new(state: ["X", nil, "X", nil, "O", nil, nil, nil, nil])
-      game = TicTacToe::Game.new(board, [@player2, @player1], game_status: TicTacToe::Checkable)
+      game = TicTacToe::Game.new(board, [@player2, @player1], @game_modules)
       
       allow(@input).to receive(:gets).and_return("2\n")
       
@@ -29,7 +33,7 @@ RSpec.describe TicTacToe::Game do
   
     it 'can execute a turn with invalid input' do
       board = @board.new(state: ["X", nil, "X", nil, "O", nil, nil, nil, nil])
-      game = TicTacToe::Game.new(board, [@player2, @player1], game_status: TicTacToe::Checkable)
+      game = TicTacToe::Game.new(board, [@player2, @player1], @game_modules)
       
       allow(@input).to receive(:gets).and_return("foo", "3\n", "2\n")
       
@@ -42,7 +46,7 @@ RSpec.describe TicTacToe::Game do
   
     it 'can execute a game' do
       board = @board.new
-      game = TicTacToe::Game.new(board, [@player1, @player2], game_status: TicTacToe::Checkable)
+      game = TicTacToe::Game.new(board, [@player1, @player2], @game_modules)
       
       allow(@input).to receive(:gets).and_return("1\n", "5\n", "3\n", "2\n", "9\n", "8\n")
       allow(game).to receive(:puts).and_return("")
@@ -63,7 +67,7 @@ RSpec.describe TicTacToe::Game do
 
     it 'can execute a turn' do
       board = @board.new(state: ["X", nil, "X", nil, "O", nil, nil, nil, nil])
-      game = TicTacToe::Game.new(board, [@player2, @player1], game_status: TicTacToe::Checkable)
+      game = TicTacToe::Game.new(board, [@player2, @player1], @game_modules)
       
       allow(@player2).to receive(:move).and_return(1)
       
@@ -76,7 +80,7 @@ RSpec.describe TicTacToe::Game do
 
     it 'can execute a game' do
       board = @board.new
-      game = TicTacToe::Game.new(board, [@player1, @player2], game_status: TicTacToe::Checkable)
+      game = TicTacToe::Game.new(board, [@player1, @player2], @game_modules)
       
       allow(@input).to receive(:gets).and_return("1\n", "foo", "5\n", "3\n", "bar", "9\n")
       allow(@player2).to receive(:move).and_return(4, 1, 7)
