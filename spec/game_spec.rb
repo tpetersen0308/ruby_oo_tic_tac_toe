@@ -2,11 +2,11 @@ require 'spec_helper'
 
 RSpec.describe TicTacToe::Game do
   it 'can execute a turn' do
-    player1, player2 = [TicTacToe::HumanPlayer.new("X"), TicTacToe::HumanPlayer.new("O")]
+    player1, player2 = [TicTacToe::HumanPlayer.new("X", ui: TicTacToe::IO::Getable), TicTacToe::HumanPlayer.new("O", ui: TicTacToe::IO::Getable)]
     board = TicTacToe::Board.new(state: ["X", nil, "X", nil, "O", nil, nil, nil, nil])
     game = TicTacToe::Game.new(board, [player2, player1])
     
-    allow(player2).to receive(:gets).and_return("2\n")
+    allow(TicTacToe::IO::Getable).to receive(:gets).and_return("2\n")
     
     game = game.turn
 
@@ -16,11 +16,11 @@ RSpec.describe TicTacToe::Game do
   end
 
   it 'can execute a turn with invalid input' do
-    player1, player2 = [TicTacToe::HumanPlayer.new("X"), TicTacToe::HumanPlayer.new("O")]
+    player1, player2 = [TicTacToe::HumanPlayer.new("X", ui: TicTacToe::IO::Getable), TicTacToe::HumanPlayer.new("O", ui: TicTacToe::IO::Getable)]
     board = TicTacToe::Board.new(state: ["X", nil, "X", nil, "O", nil, nil, nil, nil])
     game = TicTacToe::Game.new(board, [player2, player1])
     
-    allow(player2).to receive(:gets).and_return("foo", "3\n", "2\n")
+    allow(TicTacToe::IO::Getable).to receive(:gets).and_return("foo", "3\n", "2\n")
     
     game = game.turn
 
@@ -30,12 +30,11 @@ RSpec.describe TicTacToe::Game do
   end
 
   it 'can execute a game' do
-    player1, player2 = [TicTacToe::HumanPlayer.new("X"), TicTacToe::HumanPlayer.new("O")]
+    player1, player2 = [TicTacToe::HumanPlayer.new("X", ui: TicTacToe::IO::Getable), TicTacToe::HumanPlayer.new("O", ui: TicTacToe::IO::Getable)]
     board = TicTacToe::Board.new
     game = TicTacToe::Game.new(board, [player1, player2])
     
-    allow(player1).to receive(:gets).and_return("1\n", "3\n", "9\n")
-    allow(player2).to receive(:gets).and_return("5\n", "2\n", "8\n")
+    allow(TicTacToe::IO::Getable).to receive(:gets).and_return("1\n", "5\n", "3\n", "2\n", "9\n", "8\n")
     allow(game).to receive(:puts).and_return("")
     
     game = game.play
