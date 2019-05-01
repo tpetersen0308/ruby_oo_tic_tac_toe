@@ -8,7 +8,8 @@ RSpec.describe TicTacToe::Game do
     @board = TicTacToe::Board
     @game_modules = {
       game_status: TicTacToe::Checkable,
-      validator: TicTacToe::Validateable
+      validator: TicTacToe::Validateable,
+      output: TicTacToe::IO::Printable,
     }
   end
 

@@ -1,6 +1,6 @@
 module TicTacToe::IO
   module Printable
-    def print_message(msg)
+    def self.print_message(msg)
       puts(msg)
     end
   end
