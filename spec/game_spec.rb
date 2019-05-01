@@ -10,6 +10,7 @@ RSpec.describe TicTacToe::Game do
       game_status: TicTacToe::Checkable,
       validator: TicTacToe::Validateable,
       output: TicTacToe::IO::Printable,
+      messager: TicTacToe::Messageable,
     }
   end
 

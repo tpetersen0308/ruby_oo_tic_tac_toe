@@ -1,26 +1,26 @@
 class TicTacToe::Game
-  attr_reader :board, :current_player, :next_player, :game_status, :validator, :output
+  attr_reader :board, :current_player, :next_player, :game_status, :validator, :output, :messager
 
-  include TicTacToe::Messageable
   include TicTacToe::Formattable
 
-  def initialize(board, players, game_status: nil, validator: nil, output: nil )
+  def initialize(board, players, game_status: nil, validator: nil, output: nil, messager: nil )
     @board = board
     @current_player = players[0]
     @next_player = players[1]
     @game_status = game_status
     @validator = validator
     @output = output
+    @messager = messager
   end
 
   def turn
     if current_player.human?
-      output.print_message(message(:turn_prompt, current_player.token))
+      output.print_message(messager.message(:turn_prompt, current_player.token))
       move = format_move(current_player.move)
       validity = validator.validate_input(move, game_status.available_cells(board.cells))
       unless validity[:is_valid]  
         output.print_message(format_board(board.cells))
-        output.print_message(message(validity[:msg]))
+        output.print_message(messager.message(validity[:msg]))
         return turn
       end
     else
@@ -28,7 +28,7 @@ class TicTacToe::Game
     end
 
     new_board = board.update(move, current_player.token)
-    self.class.new(new_board, [next_player, current_player], game_status: game_status, validator: validator, output: output)
+    self.class.new(new_board, [next_player, current_player], game_status: game_status, validator: validator, output: output, messager: messager)
   end
   
   def play
