@@ -11,6 +11,7 @@ RSpec.describe TicTacToe::Game do
       validator: TicTacToe::Validateable,
       output: TicTacToe::IO::Printable,
       messager: TicTacToe::Messageable,
+      formatter: TicTacToe::Formattable
     }
   end
 
