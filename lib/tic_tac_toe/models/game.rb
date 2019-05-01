@@ -12,8 +12,13 @@ class TicTacToe::Game
 
   def turn
     if current_player.human?
+      print_message("\nIt is #{current_player.token}'s turn.\nPlease select an available position.")
       move = current_player.move
-      return self.turn unless validate_input(move, available_cells(board.cells))[:is_valid]
+      unless validate_input(move, available_cells(board.cells))[:is_valid]
+        print_board(board.cells)
+        print_message("\nInvalid input.\n")
+        return turn
+      end
     else
       move = current_player.move(available_cells(board.cells))
     end
@@ -23,6 +28,7 @@ class TicTacToe::Game
   end
   
   def play
+    print_board(board.cells) if current_player.human?
     game = turn
     return game if game.over?(game.board.cells)
     game.play
