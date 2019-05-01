@@ -3,6 +3,7 @@ class TicTacToe::Game
   include TicTacToe::Checkable
   include TicTacToe::IO::Printable
   include TicTacToe::Validateable
+  include TicTacToe::Messageable
 
   def initialize(board, players)
     @board = board
@@ -12,11 +13,12 @@ class TicTacToe::Game
 
   def turn
     if current_player.human?
-      print_message("\nIt is #{current_player.token}'s turn.\nPlease select an available position.")
+      print_message(message(:turn_prompt, current_player.token))
       move = current_player.move
-      unless validate_input(move, available_cells(board.cells))[:is_valid]
+      validity = validate_input(move, available_cells(board.cells))
+      unless validity[:is_valid]  
         print_board(board.cells)
-        print_message("\nInvalid input.\n")
+        print_message(message(validity[:msg]))
         return turn
       end
     else
