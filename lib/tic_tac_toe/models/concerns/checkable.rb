@@ -11,16 +11,16 @@ module TicTacToe::Checkable
     won?(cells) || cats_game?(cells)
   end
 
-  def get_rows(cells)
-    row_size = Math.sqrt(cells.size)
-    cells.each_slice(row_size).to_a
-  end
-
   def available_cells(cells)
     cells.map.with_index{ |cell, i| i if !cell }.compact
   end
-
+  
   private
+    def get_rows(cells)
+      row_size = Math.sqrt(cells.size)
+      cells.each_slice(row_size).to_a
+    end
+
     def check_row_win(cells)
       rows = get_rows(cells)
       check_combos(rows)
