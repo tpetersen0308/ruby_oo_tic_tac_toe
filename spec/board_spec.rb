@@ -25,9 +25,9 @@ RSpec.describe TicTacToe::Board do
 
   it 'can tell if it is full' do
     board = TicTacToe::Board.new
-    expect(board.full?).to be_falsy
+    expect(board.full?).to eq(false)
 
     board = TicTacToe::Board.new(state: ["X","O","X","O","X","O","X","O","X"])
-    expect(board.full?).to be_truthy
+    expect(board.full?).to eq(true)
   end
 end
