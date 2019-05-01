@@ -1,5 +1,4 @@
 module TicTacToe::Formattable
-  include TicTacToe::Checkable
   
   def format_board(cells)
     formatted_cells = format_cells(cells)
@@ -17,6 +16,7 @@ module TicTacToe::Formattable
     end
 
     def format_rows(formatted_cells)
-      get_rows(formatted_cells).map{|row| row.join("|")}
+      row_size = Math.sqrt(formatted_cells.size)
+      formatted_cells.each_slice(row_size).to_a.map{|row| row.join("|")}
     end
 end
