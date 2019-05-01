@@ -4,6 +4,7 @@ class TicTacToe::Game
   include TicTacToe::IO::Printable
   include TicTacToe::Validateable
   include TicTacToe::Messageable
+  include TicTacToe::Formattable
 
   def initialize(board, players)
     @board = board
@@ -14,10 +15,10 @@ class TicTacToe::Game
   def turn
     if current_player.human?
       print_message(message(:turn_prompt, current_player.token))
-      move = current_player.move
+      move = format_move(current_player.move)
       validity = validate_input(move, available_cells(board.cells))
       unless validity[:is_valid]  
-        print_board(board.cells)
+        print_message(format_board(board.cells))
         print_message(message(validity[:msg]))
         return turn
       end
@@ -30,7 +31,7 @@ class TicTacToe::Game
   end
   
   def play
-    print_board(board.cells) if current_player.human?
+    print_message(format_board(board.cells)) if current_player.human?
     game = turn
     return game if game.over?(game.board.cells)
     game.play

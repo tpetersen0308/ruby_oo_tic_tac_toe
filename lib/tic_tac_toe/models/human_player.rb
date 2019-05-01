@@ -5,7 +5,7 @@ class TicTacToe::HumanPlayer < TicTacToe::Player
   end
 
   def move
-    @ui.get_move
+    @ui.get_input
   end
 
   def human?
