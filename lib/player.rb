@@ -1,7 +1,9 @@
-class TicTacToe::Player 
-  attr_reader :token
+module TicTacToe
+  class Player 
+    attr_reader :token
 
-  def initialize(token)
-    @token = token
+    def initialize(token)
+      @token = token
+    end
   end
 end
