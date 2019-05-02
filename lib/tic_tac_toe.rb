@@ -39,23 +39,32 @@ module TicTacToe
     :continue_options => ["y","Y"]
   }
 
-  def self.start
-    game = CONFIG[:game_setup].new_game
+  def self.start(
+    game_setup = CONFIG.fetch(:game_setup),
+    game_status = CONFIG.fetch(:game_status),
+    output = CONFIG.fetch(:output),
+    input = CONFIG.fetch(:input),
+    formatter = CONFIG.fetch(:formatter),
+    messager = CONFIG.fetch(:messager),
+    continue_options = CONFIG.fetch(:continue_options)
+  )
+
+    game = game_setup.new_game
     game = game.play
 
-    CONFIG[:output].print_message(CONFIG[:formatter].format_board(game.board.cells))
+    output.print_message(formatter.format_board(game.board.cells))
 
-    if CONFIG[:game_status].won?(game.board.cells)
-      CONFIG[:output].print_message(CONFIG[:messager].message(:winner, game.next_player.token))
+    if game_status.won?(game.board.cells)
+      output.print_message(messager.message(:winner, game.next_player.token))
     else
-      CONFIG[:output].print_message(CONFIG[:messager].message(:cats_game))
+      output.print_message(messager.message(:cats_game))
     end
 
-    CONFIG[:output].print_message(CONFIG[:messager].message(:continue))
-    continue = CONFIG[:input].get_input
+    output.print_message(messager.message(:continue))
+    continue = input.get_input
 
-    return start if CONFIG[:continue_options].include?(continue)
+    return start if continue_options.include?(continue)
 
-    CONFIG[:output].print_message(CONFIG[:messager].message(:goodbye))
+    output.print_message(messager.message(:goodbye))
   end
 end
