@@ -1,15 +1,21 @@
 module TicTacToe
   class ComputerPlayer < Player
-    def initialize(token)
+    attr_reader :game_status
+
+    def initialize(token, game_status = CONFIG.fetch(:game_status))
       super(token)
+      self.game_status = game_status
     end
     
     def move(board_cells)
-      CONFIG.fetch(:game_status).available_cells(board_cells).sample
+      game_status.available_cells(board_cells).sample
     end
 
     def human?
       false
     end
+
+    private 
+      attr_writer :game_status
   end
 end
