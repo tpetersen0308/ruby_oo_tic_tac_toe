@@ -25,10 +25,6 @@ module TicTacToe
       formatter.format_move(move)
     end
 
-    def human?
-      true
-    end
-
     private
       attr_writer :ui, :formatter, :messager, :game_status, :selector
   end

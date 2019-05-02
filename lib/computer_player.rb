@@ -11,10 +11,6 @@ module TicTacToe
       game_status.available_cells(board_cells).sample
     end
 
-    def human?
-      false
-    end
-
     private 
       attr_writer :game_status
   end
