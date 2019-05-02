@@ -3,14 +3,14 @@ module TicTacToe
     attr_reader :board, :current_player, :next_player, :game_status, :validator, :output, :messager, :formatter
   
     def initialize(board, players)
-      @board = board
-      @current_player = players[0]
-      @next_player = players[1]
-      @game_status = TicTacToe::CONFIG[:game_status]
-      @validator = TicTacToe::CONFIG[:validator]
-      @output = TicTacToe::CONFIG[:output]
-      @messager = TicTacToe::CONFIG[:messager]
-      @formatter = TicTacToe::CONFIG[:formatter]
+      self.board = board
+      self.current_player = players[0]
+      self.next_player = players[1]
+      self.game_status = TicTacToe::CONFIG[:game_status]
+      self.validator = TicTacToe::CONFIG[:validator]
+      self.output = TicTacToe::CONFIG[:output]
+      self.messager = TicTacToe::CONFIG[:messager]
+      self.formatter = TicTacToe::CONFIG[:formatter]
     end
   
     def turn
@@ -40,5 +40,9 @@ module TicTacToe
       return game if game_status.over?(game.board.cells)
       game.play
     end
+    
+    private
+      attr_writer :board, :current_player, :next_player, :game_status, :validator, :output, :messager, :formatter
+  
   end
 end

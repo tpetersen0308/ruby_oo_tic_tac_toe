@@ -3,7 +3,10 @@ module TicTacToe
     attr_reader :token
 
     def initialize(token)
-      @token = token
+      self.token = token
     end
+
+    private
+      attr_writer :token
   end
 end

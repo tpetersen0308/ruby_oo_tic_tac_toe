@@ -4,7 +4,7 @@ module TicTacToe
     
     def initialize(token, ui: nil)
       super(token)
-      @ui = ui
+      self.ui = ui
     end
 
     def move
@@ -14,5 +14,8 @@ module TicTacToe
     def human?
       true
     end
+
+    private
+      attr_writer :ui
   end
 end
