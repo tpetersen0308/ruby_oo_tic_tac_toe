@@ -31,7 +31,7 @@ module TicTacToe
 
       def self.human_v_human_players(**config)
         config[:player_options].values.map do |token| 
-          config[:players][:human].new(token, ui: config[:input])
+          config[:players][:human].new(token)
         end
       end
 
@@ -45,13 +45,9 @@ module TicTacToe
           return human_v_computer_players(config)
         end
         
-        player1_token, player2token = config[:player_options].values
-        human_token, computer_token = selection, selection == player1_token ? player2token : player1_token
-
-        human_player = config[:players][:human].new(human_token, ui: config[:input])
-        computer_player = config[:players][:computer].new(computer_token)
-        
-        selection == player1_token ? [human_player, computer_player] : [computer_player, human_player]
+        config[:player_options].values.map do |token|
+          selection == token ? config[:players][:human].new(token) : config[:players][:computer].new(token)
+        end
       end
   end
 end
