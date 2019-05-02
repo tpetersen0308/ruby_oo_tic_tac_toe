@@ -6,11 +6,11 @@ module TicTacToe
       self.board = board
       self.current_player = players[0]
       self.next_player = players[1]
-      self.game_status = TicTacToe::CONFIG[:game_status]
-      self.validator = TicTacToe::CONFIG[:validator]
-      self.output = TicTacToe::CONFIG[:output]
-      self.messager = TicTacToe::CONFIG[:messager]
-      self.formatter = TicTacToe::CONFIG[:formatter]
+      self.game_status = TicTacToe::CONFIG.fetch(:game_status)
+      self.validator = TicTacToe::CONFIG.fetch(:validator)
+      self.output = TicTacToe::CONFIG.fetch(:output)
+      self.messager = TicTacToe::CONFIG.fetch(:messager)
+      self.formatter = TicTacToe::CONFIG.fetch(:formatter)
     end
   
     def turn
