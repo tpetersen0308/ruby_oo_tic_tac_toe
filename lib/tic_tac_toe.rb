@@ -5,6 +5,7 @@ require_relative './concerns/printable.rb'
 require_relative './concerns/validateable.rb'
 require_relative './concerns/messageable.rb'
 require_relative './concerns/setupable.rb'
+require_relative './concerns/selectable.rb'
 require_relative './board.rb'
 require_relative './player.rb'
 require_relative './computer_player.rb'
@@ -26,6 +27,7 @@ module TicTacToe
     :input => IO::Getable,
     :output => IO::Printable,
     :formatter => Formattable,
+    :selector => Selectable,
     :game_mode_options => {
       :human_v_human => "1",
       :human_v_computer => "2",
