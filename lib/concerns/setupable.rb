@@ -4,9 +4,9 @@ module TicTacToe
       game_mode = select_menu_option(:game_mode_menu, CONFIG.fetch(:game_mode_options).values)
 
       players = case game_mode 
-      when CONFIG.fetch(:game_mode_options)[:human_v_human]
+      when CONFIG.fetch(:game_mode_options).fetch(:human_v_human)
         setup_players_for_human_v_human_game
-      when CONFIG.fetch(:game_mode_options)[:human_v_computer]
+      when CONFIG.fetch(:game_mode_options).fetch(:human_v_computer)
         setup_players_for_human_v_computer_game
       end
 
@@ -16,7 +16,7 @@ module TicTacToe
     private
       def self.setup_players_for_human_v_human_game
         players = CONFIG.fetch(:player_options).values.map do |token| 
-          CONFIG.fetch(:players)[:human].new(token)
+          CONFIG.fetch(:players).fetch(:human).new(token)
         end
       end
 
@@ -24,7 +24,7 @@ module TicTacToe
         selection = select_menu_option(:player_menu, CONFIG.fetch(:player_options).values)
         
         players = CONFIG.fetch(:player_options).values.map do |token|
-          selection == token ? CONFIG.fetch(:players)[:human].new(token) : CONFIG.fetch(:players)[:computer].new(token)
+          selection == token ? CONFIG.fetch(:players).fetch(:human).new(token) : CONFIG.fetch(:players).fetch(:computer).new(token)
         end
       end
 
