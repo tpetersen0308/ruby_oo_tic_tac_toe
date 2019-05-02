@@ -1,7 +1,16 @@
 module TicTacToe
   module Setupable
-    def self.new_game(option_selector, messager, game_mode_options, game, board, player_options, players)
-      game_mode_menu = messager.message(:game_mode_menu)
+    def self.new_game(
+      option_selector = CONFIG.fetch(:option_selector), 
+      messager = CONFIG.fetch(:messager), 
+      game_mode_options = CONFIG.fetch(:game_mode_options), 
+      game = CONFIG.fetch(:game), 
+      board = CONFIG.fetch(:board), 
+      player_options = CONFIG.fetch(:player_options), 
+      players = CONFIG.fetch(:players)
+    )
+    
+    game_mode_menu = messager.message(:game_mode_menu)
       game_mode = option_selector.select_option(game_mode_menu, game_mode_options.values)
 
       players = case game_mode 
