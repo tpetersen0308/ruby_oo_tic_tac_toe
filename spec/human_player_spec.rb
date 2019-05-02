@@ -7,8 +7,8 @@ RSpec.describe TicTacToe::HumanPlayer do
 
   it 'can make a move' do
     player = TicTacToe::HumanPlayer.new("X")
-    
+    board_cells = Array.new(9)
     allow(TicTacToe::IO::Getable).to receive(:gets).and_return("4\n")
-    expect(player.move).to eq("4")
+    expect(player.move(board_cells)).to eq(3)
   end
 end

@@ -4,8 +4,8 @@ module TicTacToe
       super(token)
     end
     
-    def move(available_cells)
-      available_cells.sample
+    def move(board_cells)
+      CONFIG.fetch(:game_status).available_cells(board_cells).sample
     end
 
     def human?
