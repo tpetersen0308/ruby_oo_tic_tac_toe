@@ -9,8 +9,8 @@ RSpec.describe TicTacToe::Game do
 
   describe "Human vs. Human game" do
     before(:each) do
-      @player1 = @human.new("X", ui: @input)
-      @player2 = @human.new("O", ui: @input)
+      @player1 = @human.new("X")
+      @player2 = @human.new("O")
     end
   
     it 'can execute a turn' do
@@ -56,7 +56,7 @@ RSpec.describe TicTacToe::Game do
 
   describe "Human vs. Computer game" do
     before(:each) do
-      @player1 = @human.new("X", ui: @input)
+      @player1 = @human.new("X")
       @player2 = TicTacToe::ComputerPlayer.new("O")
     end
 

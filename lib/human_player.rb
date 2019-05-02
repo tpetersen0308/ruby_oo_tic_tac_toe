@@ -2,7 +2,7 @@ module TicTacToe
   class HumanPlayer < Player
     attr_reader :ui
     
-    def initialize(token, ui: nil)
+    def initialize(token, ui = CONFIG.fetch(:input))
       super(token)
       self.ui = ui
     end

@@ -6,7 +6,7 @@ RSpec.describe TicTacToe::HumanPlayer do
   end
 
   it 'can make a move' do
-    player = TicTacToe::HumanPlayer.new("X", ui: TicTacToe::IO::Getable)
+    player = TicTacToe::HumanPlayer.new("X")
     
     allow(TicTacToe::IO::Getable).to receive(:gets).and_return("4\n")
     expect(player.move).to eq("4")
