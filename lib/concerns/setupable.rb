@@ -1,52 +1,52 @@
 module TicTacToe
   module Setupable
-    def self.new_game(**config)
-      game_mode = game_mode_selection(config)
-      players = player_selection(game_mode, config)
+    def self.new_game
+      game_mode = game_mode_selection
+      players = player_selection(game_mode)
 
-      config[:game].new(config[:board].new, players)
+      CONFIG.fetch(:game).new(CONFIG.fetch(:board).new, players)
     end
 
     private
-      def self.game_mode_selection(**config)
-        config[:output].print_message(config[:messager].message(:game_mode_menu))
-        selection = config[:input].get_input
-        validity = config[:validator].validate_input(selection, config[:game_mode_options].values)
+      def self.game_mode_selection
+        CONFIG.fetch(:output).print_message(CONFIG.fetch(:messager).message(:game_mode_menu))
+        selection = CONFIG.fetch(:input).get_input
+        validity = CONFIG.fetch(:validator).validate_input(selection, CONFIG.fetch(:game_mode_options).values)
         
         unless validity[:is_valid]
-          config[:output].print_message(config[:messager].message(:not_available))
-          return game_mode_selection(config)
+          CONFIG.fetch(:output).print_message(CONFIG.fetch(:messager).message(:not_available))
+          return game_mode_selection
         end
 
         selection
       end
 
-      def self.player_selection(game_mode, **config)
-        if game_mode == config[:game_mode_options][:human_v_human]
-          human_v_human_players(config)
+      def self.player_selection(game_mode)
+        if game_mode == CONFIG.fetch(:game_mode_options)[:human_v_human]
+          human_v_human_players
         else
-          human_v_computer_players(config)
+          human_v_computer_players
         end
       end
 
-      def self.human_v_human_players(**config)
-        config[:player_options].values.map do |token| 
-          config[:players][:human].new(token)
+      def self.human_v_human_players
+        CONFIG.fetch(:player_options).values.map do |token| 
+          CONFIG.fetch(:players)[:human].new(token)
         end
       end
 
-      def self.human_v_computer_players(**config)
-        config[:output].print_message(config[:messager].message(:player_menu))
-        selection = config[:input].get_input.upcase
-        validity = config[:validator].validate_input(selection, config[:player_options].values)
+      def self.human_v_computer_players
+        CONFIG.fetch(:output).print_message(CONFIG.fetch(:messager).message(:player_menu))
+        selection = CONFIG.fetch(:input).get_input.upcase
+        validity = CONFIG.fetch(:validator).validate_input(selection, CONFIG.fetch(:player_options).values)
       
         unless validity[:is_valid]
-          config[:output].print_message(config[:messager].message(:not_available))
-          return human_v_computer_players(config)
+          CONFIG.fetch(:output).print_message(CONFIG.fetch(:messager).message(:not_available))
+          return human_v_computer_players
         end
         
-        config[:player_options].values.map do |token|
-          selection == token ? config[:players][:human].new(token) : config[:players][:computer].new(token)
+        CONFIG.fetch(:player_options).values.map do |token|
+          selection == token ? CONFIG.fetch(:players)[:human].new(token) : CONFIG.fetch(:players)[:computer].new(token)
         end
       end
   end

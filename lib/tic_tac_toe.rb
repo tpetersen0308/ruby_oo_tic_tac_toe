@@ -38,7 +38,7 @@ module TicTacToe
   }
 
   def self.start
-    game = CONFIG[:game_setup].new_game(CONFIG)
+    game = CONFIG[:game_setup].new_game
     game = game.play
 
     CONFIG[:output].print_message(CONFIG[:formatter].format_board(game.board.cells))
