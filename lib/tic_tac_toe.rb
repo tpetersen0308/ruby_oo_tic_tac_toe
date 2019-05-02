@@ -27,7 +27,7 @@ module TicTacToe
     :input => IO::Getable,
     :output => IO::Printable,
     :formatter => Formattable,
-    :selector => Selectable,
+    :option_selector => Selectable,
     :game_mode_options => {
       :human_v_human => "1",
       :human_v_computer => "2",
