@@ -7,13 +7,13 @@ module TicTacToe
     end
 
     def update(cell, token)
-      new_state = self.cells
+      new_state = cells
       new_state[cell] = token
       self.class.new(state: new_state)
     end
     
     def full?
-      self.cells.compact.length == self.cells.length
+      cells.compact.length == cells.length
     end
   end
 end
