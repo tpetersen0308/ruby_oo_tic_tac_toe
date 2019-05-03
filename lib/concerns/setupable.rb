@@ -15,11 +15,11 @@ module TicTacToe
         game_mode = option_selector.select_option(game_mode_menu, game_mode_options.values)
   
         players = case game_mode 
-        when game_mode_options.fetch(:human_v_human)
-          setup_players_for_human_v_human_game(players.fetch(:human), player_options)
-        when game_mode_options.fetch(:human_v_computer)
-          setup_players_for_human_v_computer_game(option_selector, player_options, players, messager)
-        end
+          when game_mode_options.fetch(:human_v_human)
+            setup_players_for_human_v_human_game(players.fetch(:human), player_options)
+          when game_mode_options.fetch(:human_v_computer)
+            setup_players_for_human_v_computer_game(option_selector, player_options, players, messager)
+          end
   
         game.new(board.new, players)
       end
