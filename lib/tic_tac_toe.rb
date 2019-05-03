@@ -49,6 +49,8 @@ module TicTacToe
     continue_options = CONFIG.fetch(:continue_options)
   )
 
+    output.print_message(messager.message(:welcome))
+
     game = game_setup.new_game
     game = game.play
 

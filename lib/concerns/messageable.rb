@@ -10,6 +10,7 @@ module TicTacToe
         :winner => "\n#{token} won!",
         :cats_game => "\nCat's game!",
         :continue => "\nEnter <yY> to play again, or anything else to quit.",
+        :welcome => "Welcome to Tic Tac Toe!",
         :goodbye => "Goodbye!"
       }
       messages[msg]
