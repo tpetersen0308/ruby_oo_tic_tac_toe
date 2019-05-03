@@ -12,6 +12,7 @@ module TicTacToe
     end
 
     private 
-      attr_writer :game_status
+    
+    attr_writer :game_status
   end
 end

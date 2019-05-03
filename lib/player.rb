@@ -7,6 +7,7 @@ module TicTacToe
     end
 
     private
-      attr_writer :token
+    
+    attr_writer :token
   end
 end

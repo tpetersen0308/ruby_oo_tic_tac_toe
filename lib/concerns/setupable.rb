@@ -25,20 +25,21 @@ module TicTacToe
       end
   
       private
-        def setup_players_for_human_v_human_game(human_player, player_options)
-          players = player_options.values.map do |token| 
-            human_player.new(token)
-          end
+      
+      def setup_players_for_human_v_human_game(human_player, player_options)
+        players = player_options.values.map do |token| 
+          human_player.new(token)
         end
-  
-        def setup_players_for_human_v_computer_game(option_selector, player_options, players, messager)
-          player_menu = messager.message(:player_menu)
-          selection = option_selector.select_option(player_menu, player_options.values)
-          
-          players = player_options.values.map do |token|
-            selection == token ? players.fetch(:human).new(token) : players.fetch(:computer).new(token)
-          end
+      end
+
+      def setup_players_for_human_v_computer_game(option_selector, player_options, players, messager)
+        player_menu = messager.message(:player_menu)
+        selection = option_selector.select_option(player_menu, player_options.values)
+        
+        players = player_options.values.map do |token|
+          selection == token ? players.fetch(:human).new(token) : players.fetch(:computer).new(token)
         end
+      end
     end
   end
 end

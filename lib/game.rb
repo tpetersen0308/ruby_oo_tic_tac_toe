@@ -26,7 +26,7 @@ module TicTacToe
     end
     
     private
-      attr_writer :board, :current_player, :next_player, :game_status, :validator, :output, :messager, :formatter
-  
+      
+    attr_writer :board, :current_player, :next_player, :game_status, :validator, :output, :messager, :formatter
   end
 end

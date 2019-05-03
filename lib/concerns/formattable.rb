@@ -12,14 +12,15 @@ module TicTacToe
       end
   
       private
-        def format_cells(cells)
-          cells.map.with_index{|cell, i| (cell || (i + 1).to_s).center(3)}
-        end
-  
-        def format_rows(formatted_cells)
-          row_size = Math.sqrt(formatted_cells.size)
-          formatted_cells.each_slice(row_size).to_a.map{|row| row.join("|")}
-        end
+      
+      def format_cells(cells)
+        cells.map.with_index{|cell, i| (cell || (i + 1).to_s).center(3)}
+      end
+
+      def format_rows(formatted_cells)
+        row_size = Math.sqrt(formatted_cells.size)
+        formatted_cells.each_slice(row_size).to_a.map{|row| row.join("|")}
+      end
     end
   end
 end

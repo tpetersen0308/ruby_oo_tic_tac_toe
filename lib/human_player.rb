@@ -26,6 +26,7 @@ module TicTacToe
     end
 
     private
-      attr_writer :ui, :formatter, :messager, :game_status, :option_selector
+    
+    attr_writer :ui, :formatter, :messager, :game_status, :option_selector
   end
 end
