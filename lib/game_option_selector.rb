@@ -5,18 +5,16 @@ require_relative './messager.rb'
 module TicTacToe
   module GameOptionSelector
     class << self
-      def select_option(prompt, options, 
+      def select_option(options, 
         game_io = GameIO,
         input_validator = InputValidator, 
         messager = Messager
       )
-  
-        game_io.print_message(prompt)
         selection = game_io.get_input.upcase
         
         unless input_validator.validate_input(selection, options)
           game_io.print_message(messager.get_message(:not_available))
-          return select_option(prompt, options)
+          return select_option(options)
         end
   
         selection

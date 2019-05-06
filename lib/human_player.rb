@@ -23,8 +23,7 @@ module TicTacToe
     end
 
     def move(available_moves)
-      prompt = messager.get_message(:turn_prompt, token)
-      option_selector.select_option(prompt, available_moves)
+      option_selector.select_option(available_moves)
     end
 
     private
