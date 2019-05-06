@@ -26,16 +26,16 @@ module TicTacToe
   
     def turn
       game_io.print_message(messager.get_message(:turn_prompt, current_player.token))
-      
       move = formatter.format_move(current_player.move(board.available_moves))
-      new_board = board.update(move, current_player.token)
-      
-      self.class.new(new_board, [next_player, current_player])
+      board.update(move, current_player.token)
     end
     
     def play
       game_io.print_message(formatter.format_board(board.cells))
-      game = turn
+      
+      updated_board = turn
+      game = self.class.new(updated_board, [next_player, current_player])
+      
       return game if game_status.over?(game.board.cells)
       game.play
     end

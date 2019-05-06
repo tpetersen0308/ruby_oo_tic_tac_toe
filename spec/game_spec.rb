@@ -24,11 +24,9 @@ RSpec.describe TicTacToe::Game do
       
       allow(@game_io).to receive(:gets).and_return("2\n")
       
-      game = game.turn
+      board = game.turn
   
-      expect(game.board.cells).to eq(["X", "O", "X", nil, "O", nil, nil, nil, nil])
-      expect(game.current_player).to eq(@player1)
-      expect(game.next_player).to eq(@player2)
+      expect(board.cells).to eq(["X", "O", "X", nil, "O", nil, nil, nil, nil])
     end
   
     it 'can execute a turn with invalid input' do
@@ -37,11 +35,9 @@ RSpec.describe TicTacToe::Game do
       
       allow(@game_io).to receive(:gets).and_return("foo", "3\n", "2\n")
       
-      game = game.turn
+      board = game.turn
   
-      expect(game.board.cells).to eq(["X", "O", "X", nil, "O", nil, nil, nil, nil])
-      expect(game.current_player).to eq(@player1)
-      expect(game.next_player).to eq(@player2)
+      expect(board.cells).to eq(["X", "O", "X", nil, "O", nil, nil, nil, nil])
     end
   
     it 'can execute a game' do
@@ -71,11 +67,9 @@ RSpec.describe TicTacToe::Game do
       
       allow(@player2).to receive(:move).and_return(1)
       
-      game = game.turn
+      board = game.turn
   
-      expect(game.board.cells).to eq(["X", "O", "X", nil, "O", nil, nil, nil, nil])
-      expect(game.current_player).to eq(@player1)
-      expect(game.next_player).to eq(@player2)
+      expect(board.cells).to eq(["X", "O", "X", nil, "O", nil, nil, nil, nil])
     end
 
     it 'can execute a game' do
