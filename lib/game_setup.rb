@@ -27,7 +27,7 @@ module TicTacToe
         }
       )
       
-        game_mode_menu = messager.message(:game_mode_menu)
+        game_mode_menu = messager.get_message(:game_mode_menu)
         game_mode = option_selector.select_option(game_mode_menu, game_mode_options.values)
   
         players = case game_mode 
@@ -49,7 +49,7 @@ module TicTacToe
       end
 
       def setup_players_for_human_v_computer_game(option_selector, player_options, players, messager)
-        player_menu = messager.message(:player_menu)
+        player_menu = messager.get_message(:player_menu)
         selection = option_selector.select_option(player_menu, player_options.values)
         
         players = player_options.values.map do |token|

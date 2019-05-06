@@ -14,7 +14,7 @@ module TicTacToe
     continue_options = ["y", "Y"]
   )
 
-    game_io.print_message(messager.message(:welcome))
+    game_io.print_message(messager.get_message(:welcome))
 
     game = game_setup.new_game
     game = game.play
@@ -22,16 +22,16 @@ module TicTacToe
     game_io.print_message(formatter.format_board(game.board.cells))
 
     if game_status.won?(game.board.cells)
-      game_io.print_message(messager.message(:winner, game.next_player.token))
+      game_io.print_message(messager.get_message(:winner, game.next_player.token))
     else
-      game_io.print_message(messager.message(:cats_game))
+      game_io.print_message(messager.get_message(:cats_game))
     end
 
-    game_io.print_message(messager.message(:continue))
+    game_io.print_message(messager.get_message(:continue))
     continue = game_io.get_input
 
     return start if continue_options.include?(continue)
 
-    game_io.print_message(messager.message(:goodbye))
+    game_io.print_message(messager.get_message(:goodbye))
   end
 end

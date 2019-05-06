@@ -15,7 +15,7 @@ module TicTacToe
         selection = game_io.get_input.upcase
         
         unless input_validator.validate_input(selection, options)
-          game_io.print_message(messager.message(:not_available))
+          game_io.print_message(messager.get_message(:not_available))
           return select_option(prompt, options)
         end
   

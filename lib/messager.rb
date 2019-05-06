@@ -1,7 +1,7 @@
 module TicTacToe
   module Messager
     class << self
-      def message(msg, token = nil)
+      def get_message(msg, token = nil)
         messages = {
           :turn_prompt => "\nIt is #{token}'s turn.\nSelect any available position:",
           :nan => "\nThat is not a valid integer. Please try again.",
