@@ -26,6 +26,8 @@ module TicTacToe
     game_io.print_message(messager.get_message(:goodbye))
   end
   
+  private
+  
   def self.end(game_io, formatter, game, game_status, messager)
     game_io.print_message(formatter.format_board(game.board.cells))
   
