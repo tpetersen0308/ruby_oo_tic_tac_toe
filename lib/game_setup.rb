@@ -1,5 +1,5 @@
 module TicTacToe
-  module Setupable
+  module GameSetup
     class << self
       def new_game(
         option_selector = CONFIG.fetch(:option_selector), 

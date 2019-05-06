@@ -1,5 +1,5 @@
 module TicTacToe
-  module Selectable
+  module GameOptionSelector
     class << self
       def select_option(prompt, options, 
         output = CONFIG.fetch(:output), 

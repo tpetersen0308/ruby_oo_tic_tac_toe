@@ -1,5 +1,5 @@
 module TicTacToe
-  module Formattable
+  module IOFormatter
     class << self
       def format_board(cells)
         formatted_cells = format_cells(cells)

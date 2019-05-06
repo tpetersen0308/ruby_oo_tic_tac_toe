@@ -1,5 +1,5 @@
 module TicTacToe
-  module Checkable
+  module GameStatus
     class << self
       def won?(cells)
         check_row_win(cells) || check_column_win(cells) || check_diagonal_win(cells)

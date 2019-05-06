@@ -1,5 +1,5 @@
 module TicTacToe
-  module Messageable
+  module Messager
     class << self
       def message(msg, token = nil)
         messages = {

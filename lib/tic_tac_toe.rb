@@ -1,11 +1,10 @@
-require_relative './concerns/checkable.rb'
-require_relative './concerns/formattable.rb'
-require_relative './concerns/getable.rb'
-require_relative './concerns/printable.rb'
-require_relative './concerns/validateable.rb'
-require_relative './concerns/messageable.rb'
-require_relative './concerns/setupable.rb'
-require_relative './concerns/selectable.rb'
+require_relative './game_status.rb'
+require_relative './io_formatter.rb'
+require_relative './game_io.rb'
+require_relative './input_validator.rb'
+require_relative './messager.rb'
+require_relative './game_setup.rb'
+require_relative './game_option_selector.rb'
 require_relative './board.rb'
 require_relative './player.rb'
 require_relative './computer_player.rb'
@@ -20,14 +19,13 @@ module TicTacToe
     },
     :board => Board,
     :game => Game,
-    :game_status => Checkable,
-    :game_setup => Setupable,
-    :validator => Validateable,
-    :messager => Messageable,
-    :input => IO::Getable,
-    :output => IO::Printable,
-    :formatter => Formattable,
-    :option_selector => Selectable,
+    :game_status => GameStatus,
+    :game_setup => GameSetup,
+    :validator => InputValidator,
+    :messager => Messager,
+    :user_interface => IO,
+    :formatter => IOFormatter,
+    :option_selector => GameOptionSelector,
     :game_mode_options => {
       :human_v_human => "1",
       :human_v_computer => "2",
