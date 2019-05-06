@@ -1,14 +1,30 @@
+require_relative './game_option_selector.rb'
+require_relative './messager.rb'
+require_relative './game.rb'
+require_relative './board.rb'
+require_relative './human_player.rb'
+require_relative './computer_player.rb'
+
 module TicTacToe
   module GameSetup
     class << self
       def new_game(
-        option_selector = CONFIG.fetch(:option_selector), 
-        messager = CONFIG.fetch(:messager), 
-        game_mode_options = CONFIG.fetch(:game_mode_options), 
-        game = CONFIG.fetch(:game), 
-        board = CONFIG.fetch(:board), 
-        player_options = CONFIG.fetch(:player_options), 
-        players = CONFIG.fetch(:players)
+        option_selector = GameOptionSelector, 
+        messager = Messager, 
+        game = Game, 
+        board = Board, 
+        players = {
+          :human => HumanPlayer,
+          :computer => ComputerPlayer
+        },
+        game_mode_options = {
+          :human_v_human => "1",
+          :human_v_computer => "2" 
+        }, 
+        player_options = {
+          :player1 => "X",
+          :player2 => "O",
+        }
       )
       
         game_mode_menu = messager.message(:game_mode_menu)

@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative '../lib/board.rb'
 
 RSpec.describe TicTacToe::Board do
   it 'initializes with an empty array representing a 3x3 board by default' do

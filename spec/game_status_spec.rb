@@ -1,6 +1,7 @@
 require 'spec_helper'
+require_relative '../lib/game_status.rb'
 
-RSpec.describe TicTacToe::Checkable do
+RSpec.describe TicTacToe::GameStatus do
   [
     [0, 1, 2, "top row"],
     [3, 4, 5, "middle row"],
@@ -15,33 +16,33 @@ RSpec.describe TicTacToe::Checkable do
       cells = Array.new(9)
       cells[first], cells[second], cells[third] = "X", "X", "X"
       
-      expect(TicTacToe::Checkable.won?(cells)).to eq(true)
+      expect(TicTacToe::GameStatus.won?(cells)).to eq(true)
     end
   end
 
   it "returns a falsy value when there is not a win" do
     cells = [nil, nil, "X", nil, "O", nil, "X", nil, nil]
 
-    expect(TicTacToe::Checkable.won?(cells)).to eq(false)
+    expect(TicTacToe::GameStatus.won?(cells)).to eq(false)
   end
 
   it "can check for a cat's game" do
     cells = ["X", "O", "X", "X", "O", "X", "O", "X", "O"]
 
-    expect(TicTacToe::Checkable.cats_game?(cells)).to eq(true)
+    expect(TicTacToe::GameStatus.cats_game?(cells)).to eq(true)
   end
 
   it "can check if the game is over" do
     cells = ["X", "O", nil, "X", "X", nil, "O", "O", "X"]
-    expect(TicTacToe::Checkable.over?(cells)).to eq(true)
+    expect(TicTacToe::GameStatus.over?(cells)).to eq(true)
 
     cells = ["X", "O", "X", "X", "O", "X", "O", "X", "O"]
-    expect(TicTacToe::Checkable.over?(cells)).to eq(true)
+    expect(TicTacToe::GameStatus.over?(cells)).to eq(true)
   end
 
   it 'can return an array of available positions' do
     cells = [nil, nil, "X", nil, "O", nil, "X", nil, nil]
 
-    expect(TicTacToe::Checkable.available_cells(cells)).to eq([0,1,3,5,7,8])
+    expect(TicTacToe::GameStatus.available_cells(cells)).to eq([0,1,3,5,7,8])
   end
 end

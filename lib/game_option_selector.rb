@@ -1,18 +1,21 @@
+require_relative './game_io.rb'
+require_relative './input_validator.rb'
+require_relative './messager.rb'
+
 module TicTacToe
   module GameOptionSelector
     class << self
       def select_option(prompt, options, 
-        output = CONFIG.fetch(:output), 
-        input = CONFIG.fetch(:input), 
-        validator = CONFIG.fetch(:validator), 
-        messager = CONFIG.fetch(:messager)
+        game_io = GameIO,
+        input_validator = InputValidator, 
+        messager = Messager
       )
   
-        output.print_message(prompt)
-        selection = input.get_input.upcase
+        game_io.print_message(prompt)
+        selection = game_io.get_input.upcase
         
-        unless validator.validate_input(selection, options)
-          output.print_message(messager.message(:not_available))
+        unless input_validator.validate_input(selection, options)
+          game_io.print_message(messager.message(:not_available))
           return select_option(prompt, options)
         end
   

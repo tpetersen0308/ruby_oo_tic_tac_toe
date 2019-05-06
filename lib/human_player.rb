@@ -1,16 +1,21 @@
+require_relative './player.rb'
+require_relative './io_formatter'
+require_relative './messager.rb'
+require_relative './game_status.rb'
+require_relative './game_option_selector.rb'
+
 module TicTacToe
   class HumanPlayer < Player
-    attr_reader :ui, :formatter, :messager, :game_status, :option_selector
+    attr_reader :formatter, :messager, :game_status, :option_selector
     
-    def initialize(token, 
-      ui = CONFIG.fetch(:input),
-      formatter = CONFIG.fetch(:formatter),
-      messager = CONFIG.fetch(:messager),
-      game_status = CONFIG.fetch(:game_status),
-      option_selector = CONFIG.fetch(:option_selector)
+    def initialize(
+      token,
+      formatter = IOFormatter,
+      messager = Messager,
+      game_status = GameStatus,
+      option_selector = GameOptionSelector
     )
       super(token)
-      self.ui = ui
       self.formatter = formatter 
       self.messager = messager 
       self.game_status = game_status 
@@ -27,6 +32,6 @@ module TicTacToe
 
     private
     
-    attr_writer :ui, :formatter, :messager, :game_status, :option_selector
+    attr_writer :formatter, :messager, :game_status, :option_selector
   end
 end

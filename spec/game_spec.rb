@@ -1,8 +1,13 @@
 require 'spec_helper'
+require_relative '../lib/game.rb'
+require_relative '../lib/game_io.rb'
+require_relative '../lib/human_player.rb'
+require_relative '../lib/computer_player.rb'
+require_relative '../lib/board.rb'
 
 RSpec.describe TicTacToe::Game do
   before(:each) do
-    @input = TicTacToe::IO::Getable
+    @game_io = TicTacToe::GameIO
     @human = TicTacToe::HumanPlayer
     @board = TicTacToe::Board
   end
@@ -17,7 +22,7 @@ RSpec.describe TicTacToe::Game do
       board = @board.new(state: ["X", nil, "X", nil, "O", nil, nil, nil, nil])
       game = TicTacToe::Game.new(board, [@player2, @player1])
       
-      allow(@input).to receive(:gets).and_return("2\n")
+      allow(@game_io).to receive(:gets).and_return("2\n")
       
       game = game.turn
   
@@ -30,7 +35,7 @@ RSpec.describe TicTacToe::Game do
       board = @board.new(state: ["X", nil, "X", nil, "O", nil, nil, nil, nil])
       game = TicTacToe::Game.new(board, [@player2, @player1])
       
-      allow(@input).to receive(:gets).and_return("foo", "3\n", "2\n")
+      allow(@game_io).to receive(:gets).and_return("foo", "3\n", "2\n")
       
       game = game.turn
   
@@ -43,7 +48,7 @@ RSpec.describe TicTacToe::Game do
       board = @board.new
       game = TicTacToe::Game.new(board, [@player1, @player2])
       
-      allow(@input).to receive(:gets).and_return("1\n", "5\n", "3\n", "2\n", "9\n", "8\n")
+      allow(@game_io).to receive(:gets).and_return("1\n", "5\n", "3\n", "2\n", "9\n", "8\n")
       allow(game).to receive(:puts).and_return("")
       
       game = game.play
@@ -77,7 +82,7 @@ RSpec.describe TicTacToe::Game do
       board = @board.new
       game = TicTacToe::Game.new(board, [@player1, @player2])
       
-      allow(@input).to receive(:gets).and_return("1\n", "foo", "5\n", "3\n", "bar", "9\n")
+      allow(@game_io).to receive(:gets).and_return("1\n", "foo", "5\n", "3\n", "bar", "9\n")
       allow(@player2).to receive(:move).and_return(4, 1, 7)
       allow(game).to receive(:puts).and_return("")
       

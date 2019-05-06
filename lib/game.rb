@@ -1,16 +1,14 @@
+require_relative './game_status.rb'
+
 module TicTacToe
   class Game
-    attr_reader :board, :current_player, :next_player, :game_status, :validator, :output, :messager, :formatter
+    attr_reader :board, :current_player, :next_player, :game_status
   
-    def initialize(board, players)
+    def initialize(board, players, game_status = GameStatus)
       self.board = board
       self.current_player = players[0]
       self.next_player = players[1]
-      self.game_status = CONFIG.fetch(:game_status)
-      self.validator = CONFIG.fetch(:validator)
-      self.output = CONFIG.fetch(:output)
-      self.messager = CONFIG.fetch(:messager)
-      self.formatter = CONFIG.fetch(:formatter)
+      self.game_status = game_status
     end
   
     def turn
@@ -27,6 +25,6 @@ module TicTacToe
     
     private
       
-    attr_writer :board, :current_player, :next_player, :game_status, :validator, :output, :messager, :formatter
+    attr_writer :board, :current_player, :next_player, :game_status
   end
 end

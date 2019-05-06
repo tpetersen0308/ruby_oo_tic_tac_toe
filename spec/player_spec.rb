@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative '../lib/player.rb'
 
 RSpec.describe TicTacToe::Player do
   it 'initializes with a token' do

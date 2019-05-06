@@ -1,5 +1,5 @@
 module TicTacToe
-  module IO
+  module GameIO
     class << self
       def get_input
         gets.chomp
