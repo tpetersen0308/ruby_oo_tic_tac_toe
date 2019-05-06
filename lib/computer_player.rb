@@ -10,8 +10,8 @@ module TicTacToe
       self.game_status = game_status
     end
     
-    def move(board_cells)
-      game_status.available_cells(board_cells).sample
+    def move(available_moves)
+      available_moves.sample
     end
 
     private 
