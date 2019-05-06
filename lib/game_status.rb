@@ -12,10 +12,6 @@ module TicTacToe
       def over?(cells)
         won?(cells) || cats_game?(cells)
       end
-  
-      def available_moves(cells)
-        cells.map.with_index{ |cell, i| i if !cell }.compact.map{|cell| (cell += 1).to_s}
-      end
       
       private
       

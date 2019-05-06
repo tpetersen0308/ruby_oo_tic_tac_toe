@@ -39,10 +39,4 @@ RSpec.describe TicTacToe::GameStatus do
     cells = ["X", "O", "X", "X", "O", "X", "O", "X", "O"]
     expect(TicTacToe::GameStatus.over?(cells)).to eq(true)
   end
-
-  it 'can return an array of available positions' do
-    cells = [nil, nil, "X", nil, "O", nil, "X", nil, nil]
-
-    expect(TicTacToe::GameStatus.available_moves(cells)).to eq(["1","2","4","6","8","9"])
-  end
 end

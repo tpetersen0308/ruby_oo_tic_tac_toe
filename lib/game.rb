@@ -27,10 +27,9 @@ module TicTacToe
     def turn
       game_io.print_message(messager.get_message(:turn_prompt, current_player.token))
       
-      available_moves = game_status.available_moves(board.cells)
-      move = formatter.format_move(current_player.move(available_moves))
-      
+      move = formatter.format_move(current_player.move(board.available_moves))
       new_board = board.update(move, current_player.token)
+      
       self.class.new(new_board, [next_player, current_player])
     end
     

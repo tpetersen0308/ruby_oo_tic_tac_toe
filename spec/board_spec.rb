@@ -31,4 +31,10 @@ RSpec.describe TicTacToe::Board do
     board = TicTacToe::Board.new(state: ["X","O","X","O","X","O","X","O","X"])
     expect(board.full?).to eq(true)
   end
+
+  it 'can return an array of available moves' do
+    board = TicTacToe::Board.new(state: [nil, nil, "X", nil, "O", nil, "X", nil, nil])
+
+    expect(board.available_moves).to eq(["1","2","4","6","8","9"])
+  end
 end

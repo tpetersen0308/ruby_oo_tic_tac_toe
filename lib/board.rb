@@ -15,5 +15,9 @@ module TicTacToe
     def full?
       cells.compact.length == cells.length
     end
+   
+    def available_moves
+      cells.map.with_index{ |cell, i| i if !cell }.compact.map{|cell| (cell += 1).to_s}
+    end
   end
 end
