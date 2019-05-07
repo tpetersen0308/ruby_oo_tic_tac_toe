@@ -1,8 +1,8 @@
 module TicTacToe
   class Board
-    attr_reader :cells, :row_size
+    attr_reader :cells, :row_size, :empty_cell_state
     
-    def initialize(row_size: 3, state: Array.new(row_size**2))
+    def initialize(row_size: 3, empty_cell_state: nil, state: Array.new(row_size**2, empty_cell_state))
       self.cells = state
       self.row_size = row_size
     end
@@ -14,15 +14,20 @@ module TicTacToe
     end
     
     def full?
-      cells.compact.length == cells.length
+      available_positions.empty?
     end
    
-    def available_cells
-      cells.map.with_index{ |cell, i| i if !cell }.compact
+    def available_positions
+      positions = (0..(cells.length - 1)).to_a
+      positions.select{ |position| available?(position) }
+    end
+
+    def available?(position)
+      cells[position] == empty_cell_state
     end
 
     private
-    
-    attr_writer :cells, :row_size
+
+    attr_writer :cells, :row_size, :empty_cell_state
   end
 end
