@@ -9,8 +9,8 @@ RSpec.describe TicTacToe::HumanPlayer do
 
   it 'can make a move' do
     player = TicTacToe::HumanPlayer.new("X")
-    available_cells = ["1", "4", "8", "9"]
+    available_positions = ["1", "4", "8", "9"]
     allow(TicTacToe::GameIO).to receive(:gets).and_return("4\n")
-    expect(player.move(available_cells)).to eq("4")
+    expect(player.move(available_positions)).to eq("4")
   end
 end
