@@ -31,7 +31,7 @@ module TicTacToe
   def self.end(game_io, formatter, game, game_status, messager)
     game_io.print_message(formatter.format_board(game.board.cells))
   
-    if game_status.won?(game.board.cells)
+    if game_status.won?(game.board)
       game_io.print_message(messager.get_message(:winner, game.next_player.token))
     else
       game_io.print_message(messager.get_message(:cats_game))

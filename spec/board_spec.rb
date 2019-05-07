@@ -35,6 +35,6 @@ RSpec.describe TicTacToe::Board do
   it 'can return an array of available moves' do
     board = TicTacToe::Board.new(state: [nil, nil, "X", nil, "O", nil, "X", nil, nil])
 
-    expect(board.available_moves).to eq(["1","2","4","6","8","9"])
+    expect(board.available_cells).to eq([0,1,3,5,7,8])
   end
 end

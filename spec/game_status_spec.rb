@@ -15,28 +15,33 @@ RSpec.describe TicTacToe::GameStatus do
     it "can check for a #{desc} win" do
       cells = Array.new(9)
       cells[first], cells[second], cells[third] = "X", "X", "X"
+      board = TicTacToe::Board.new(state: cells)
       
-      expect(TicTacToe::GameStatus.won?(cells)).to eq(true)
+      expect(TicTacToe::GameStatus.won?(board)).to eq(true)
     end
   end
-
+  
   it "returns a falsy value when there is not a win" do
     cells = [nil, nil, "X", nil, "O", nil, "X", nil, nil]
-
-    expect(TicTacToe::GameStatus.won?(cells)).to eq(false)
+    board = TicTacToe::Board.new(state: cells)
+    
+    expect(TicTacToe::GameStatus.won?(board)).to eq(false)
   end
-
+  
   it "can check for a cat's game" do
     cells = ["X", "O", "X", "X", "O", "X", "O", "X", "O"]
-
-    expect(TicTacToe::GameStatus.cats_game?(cells)).to eq(true)
+    board = TicTacToe::Board.new(state: cells)
+    
+    expect(TicTacToe::GameStatus.cats_game?(board)).to eq(true)
   end
-
+  
   it "can check if the game is over" do
     cells = ["X", "O", nil, "X", "X", nil, "O", "O", "X"]
-    expect(TicTacToe::GameStatus.over?(cells)).to eq(true)
-
+    board = TicTacToe::Board.new(state: cells)
+    expect(TicTacToe::GameStatus.over?(board)).to eq(true)
+    
     cells = ["X", "O", "X", "X", "O", "X", "O", "X", "O"]
-    expect(TicTacToe::GameStatus.over?(cells)).to eq(true)
+    board = TicTacToe::Board.new(state: cells)
+    expect(TicTacToe::GameStatus.over?(board)).to eq(true)
   end
 end

@@ -1,9 +1,10 @@
 module TicTacToe
   class Board
-    attr_accessor :cells
+    attr_reader :cells, :row_size
     
     def initialize(row_size: 3, state: Array.new(row_size**2))
       self.cells = state
+      self.row_size = row_size
     end
 
     def update(cell, token)
@@ -16,8 +17,12 @@ module TicTacToe
       cells.compact.length == cells.length
     end
    
-    def available_moves
-      cells.map.with_index{ |cell, i| i if !cell }.compact.map{|cell| (cell += 1).to_s}
+    def available_cells
+      cells.map.with_index{ |cell, i| i if !cell }.compact
     end
+
+    private
+    
+    attr_writer :cells, :row_size
   end
 end
