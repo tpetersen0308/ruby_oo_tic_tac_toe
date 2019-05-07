@@ -1,9 +1,7 @@
 source "https://rubygems.org"
 
-gem 'require_all'
-gem 'rspec'
-
 group :development do
+  gem 'rspec'
   gem 'rake'
   gem 'guard'
   gem 'guard-rspec'

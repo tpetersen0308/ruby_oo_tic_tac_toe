@@ -36,7 +36,6 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
-    require_all (2.0.0)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -62,7 +61,6 @@ DEPENDENCIES
   guard-rspec
   pry
   rake
-  require_all
   rspec
 
 BUNDLED WITH
