@@ -55,9 +55,9 @@ module TicTacToe
       def setup_board_per_game_mode(option_selector, game_mode_options, boards, database)
         case option_selector.select_option(game_mode_options.values)
         when game_mode_options.fetch(:tic_tac_toe)
-          boards.fetch(:standard_board).new(db: database)
+          boards.fetch(:standard_board).new(move_database: database)
         when game_mode_options.fetch(:lite_3)
-          boards.fetch(:lite_board).new(db: database)
+          boards.fetch(:lite_board).new(move_database: database)
         end
       end
 

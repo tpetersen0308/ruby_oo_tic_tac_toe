@@ -7,12 +7,12 @@ RSpec.describe TicTacToe::StandardBoard do
     @db = MoveDatabase.new
   end
   it 'can return an updated board' do
-    board = TicTacToe::StandardBoard.new(db: @db)
+    board = TicTacToe::StandardBoard.new(move_database: @db)
     [['X', 2], ['O', 4], ['X', 6], ['O', 8]].each do |token, position|
       @db.add_move(token, position)
     end
     updated_board = board.update
-    expected_board = TicTacToe::StandardBoard.new(db: @db, state: [nil, nil, 'X', nil, 'O', nil, 'X', nil, 'O'])
+    expected_board = TicTacToe::StandardBoard.new(move_database: @db, state: [nil, nil, 'X', nil, 'O', nil, 'X', nil, 'O'])
 
     expect(updated_board.cells).to eq(expected_board.cells)
   end

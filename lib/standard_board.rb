@@ -3,21 +3,21 @@ require_relative './board.rb'
 
 module TicTacToe
   class StandardBoard < Board
-    attr_reader :db
-    def initialize(db: DB[:conn], **kwargs)
+    attr_reader :move_database
+    def initialize(move_database: DB[:conn], **kwargs)
       super(**kwargs)
-      self.db = db
+      self.move_database = move_database
     end
 
     def update
-      moves = db.get_all_moves
+      moves = move_database.get_all_moves
       new_cells = Array.new(row_size**2, empty_cell_state)
       moves.each { |move| new_cells[move['position']] = move['player'] }
-      self.class.new(db: db, state: new_cells)
+      self.class.new(move_database: move_database, state: new_cells)
     end
 
     private
 
-    attr_writer :db
+    attr_writer :move_database
   end
 end
