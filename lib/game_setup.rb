@@ -48,7 +48,7 @@ module TicTacToe
       private
 
       def setup_players_for_human_v_human_game(human_player, player_options)
-        players = player_options.values.map do |token|
+        player_options.values.map do |token|
           human_player.new(token)
         end
       end
