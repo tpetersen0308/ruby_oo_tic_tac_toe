@@ -15,10 +15,12 @@ module TicTacToe
         option_selector = GameOptionSelector,
         messager = Messager,
         game = Game,
-        standard_board = StandardBoard,
-        lite_board = LiteBoard,
         move_database = MoveDatabase,
         game_io = GameIO,
+        boards = {
+          standard_board: StandardBoard,
+          lite_board: LiteBoard
+        },
         players = {
           human: HumanPlayer,
           computer: ComputerPlayer
@@ -37,31 +39,36 @@ module TicTacToe
         }
       )
 
+        database = move_database.new
+
         game_io.print_message(messager.get_message(:game_mode_menu))
-        game_mode = option_selector.select_option(game_mode_options.values)
+        board = setup_board_per_game_mode(option_selector, game_mode_options, boards, database)
 
         game_io.print_message(messager.get_message(:player_mode_menu))
-        player_mode = option_selector.select_option(player_mode_options.values)
+        players = setup_players_per_player_mode(option_selector, player_mode_options, player_options, players, messager, game_io)
 
-        players = case player_mode
-                  when player_mode_options.fetch(:human_v_human)
-                    setup_players_for_human_v_human_game(players.fetch(:human), player_options)
-                  when player_mode_options.fetch(:human_v_computer)
-                    setup_players_for_human_v_computer_game(option_selector, player_options, players, messager, game_io)
-                  end
-
-        new_move_db = move_database.new
-        board = case game_mode
-                when game_mode_options.fetch(:tic_tac_toe)
-                  standard_board.new(db: new_move_db)
-                when game_mode_options.fetch(:lite_3)
-                  lite_board.new(db: new_move_db)
-                end
-
-        game.new(board, players, new_move_db)
+        game.new(board, players, database)
       end
 
       private
+
+      def setup_board_per_game_mode(option_selector, game_mode_options, boards, database)
+        case option_selector.select_option(game_mode_options.values)
+        when game_mode_options.fetch(:tic_tac_toe)
+          boards.fetch(:standard_board).new(db: database)
+        when game_mode_options.fetch(:lite_3)
+          boards.fetch(:lite_board).new(db: database)
+        end
+      end
+
+      def setup_players_per_player_mode(option_selector, player_mode_options, player_options, players, messager, game_io)
+        case option_selector.select_option(player_mode_options.values)
+        when player_mode_options.fetch(:human_v_human)
+          setup_players_for_human_v_human_game(players.fetch(:human), player_options)
+        when player_mode_options.fetch(:human_v_computer)
+          setup_players_for_human_v_computer_game(option_selector, player_options, players, messager, game_io)
+        end
+      end
 
       def setup_players_for_human_v_human_game(human_player, player_options)
         player_options.values.map do |token|
