@@ -3,6 +3,7 @@ require_relative './messager.rb'
 require_relative './game_io.rb'
 require_relative './game.rb'
 require_relative './standard_board.rb'
+require_relative './lite_board.rb'
 require_relative './human_player.rb'
 require_relative './computer_player.rb'
 require_relative './move_database.rb'
@@ -15,11 +16,16 @@ module TicTacToe
         messager = Messager,
         game = Game,
         standard_board = StandardBoard,
+        lite_board = LiteBoard,
         move_database = MoveDatabase,
         game_io = GameIO,
         players = {
           human: HumanPlayer,
           computer: ComputerPlayer
+        },
+        game_mode_options = {
+          tic_tac_toe: '1',
+          lite_3: '2'
         },
         player_mode_options = {
           human_v_human: '1',
@@ -30,6 +36,9 @@ module TicTacToe
           player2: 'O'
         }
       )
+
+        game_io.print_message(messager.get_message(:game_mode_menu))
+        game_mode = option_selector.select_option(game_mode_options.values)
 
         game_io.print_message(messager.get_message(:player_mode_menu))
         player_mode = option_selector.select_option(player_mode_options.values)
@@ -42,7 +51,14 @@ module TicTacToe
                   end
 
         new_move_db = move_database.new
-        game.new(standard_board.new(db: new_move_db), players, new_move_db)
+        board = case game_mode
+                when game_mode_options.fetch(:tic_tac_toe)
+                  standard_board.new(db: new_move_db)
+                when game_mode_options.fetch(:lite_3)
+                  lite_board.new(db: new_move_db)
+                end
+
+        game.new(board, players, new_move_db)
       end
 
       private
