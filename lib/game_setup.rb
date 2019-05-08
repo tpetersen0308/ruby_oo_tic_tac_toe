@@ -21,7 +21,7 @@ module TicTacToe
           human: HumanPlayer,
           computer: ComputerPlayer
         },
-        game_mode_options = {
+        player_mode_options = {
           human_v_human: '1',
           human_v_computer: '2'
         },
@@ -31,13 +31,13 @@ module TicTacToe
         }
       )
 
-        game_io.print_message(messager.get_message(:game_mode_menu))
-        game_mode = option_selector.select_option(game_mode_options.values)
+        game_io.print_message(messager.get_message(:player_mode_menu))
+        player_mode = option_selector.select_option(player_mode_options.values)
 
-        players = case game_mode
-                  when game_mode_options.fetch(:human_v_human)
+        players = case player_mode
+                  when player_mode_options.fetch(:human_v_human)
                     setup_players_for_human_v_human_game(players.fetch(:human), player_options)
-                  when game_mode_options.fetch(:human_v_computer)
+                  when player_mode_options.fetch(:human_v_computer)
                     setup_players_for_human_v_computer_game(option_selector, player_options, players, messager, game_io)
                   end
 
