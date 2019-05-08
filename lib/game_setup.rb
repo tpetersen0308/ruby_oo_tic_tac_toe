@@ -5,6 +5,7 @@ require_relative './game.rb'
 require_relative './standard_board.rb'
 require_relative './human_player.rb'
 require_relative './computer_player.rb'
+require_relative './move_database.rb'
 
 module TicTacToe
   module GameSetup
@@ -14,6 +15,7 @@ module TicTacToe
         messager = Messager,
         game = Game,
         standard_board = StandardBoard,
+        move_database = MoveDatabase,
         game_io = GameIO,
         players = {
           human: HumanPlayer,
@@ -37,9 +39,10 @@ module TicTacToe
                     setup_players_for_human_v_human_game(players.fetch(:human), player_options)
                   when game_mode_options.fetch(:human_v_computer)
                     setup_players_for_human_v_computer_game(option_selector, player_options, players, messager, game_io)
-          end
+                  end
 
-        game.new(standard_board.new, players)
+        new_move_db = move_database.new
+        game.new(standard_board.new(db: new_move_db), players, new_move_db)
       end
 
       private

@@ -5,12 +5,12 @@ require_relative './messager.rb'
 
 module TicTacToe
   class Game
-    attr_reader :board, :current_player, :next_player, :game_status, :formatter, :game_io, :messager, :database
+    attr_reader :board, :current_player, :next_player, :game_status, :formatter, :game_io, :messager, :move_database
 
     def initialize(
       board,
       players,
-      database = DB[:conn],
+      move_database,
       game_status = GameStatus,
       formatter = IOFormatter,
       game_io = GameIO,
@@ -23,7 +23,7 @@ module TicTacToe
       self.formatter = formatter
       self.game_io = game_io
       self.messager = messager
-      self.database = database
+      self.move_database = move_database
     end
 
     def turn
@@ -32,7 +32,7 @@ module TicTacToe
       available_moves = board.available_positions.map { |position| (position + 1).to_s }
       move = formatter.format_move(current_player.move(available_moves))
 
-      database.execute("INSERT INTO moves (player, position) VALUES ('#{current_player.token}', #{move})")
+      move_database.add_move(current_player.token, move)
 
       board.update
     end
@@ -41,7 +41,7 @@ module TicTacToe
       game_io.print_message(formatter.format_board(board.cells))
 
       updated_board = turn
-      game = self.class.new(updated_board, [next_player, current_player], database)
+      game = self.class.new(updated_board, [next_player, current_player], move_database)
 
       return game if game_status.over?(game.board)
 
@@ -50,6 +50,6 @@ module TicTacToe
 
     private
 
-    attr_writer :board, :current_player, :next_player, :game_status, :formatter, :game_io, :messager, :database
+    attr_writer :board, :current_player, :next_player, :game_status, :formatter, :game_io, :messager, :move_database
   end
 end

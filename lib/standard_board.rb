@@ -10,7 +10,7 @@ module TicTacToe
     end
 
     def update
-      moves = db.execute('SELECT * FROM moves')
+      moves = db.get_all_moves
       new_cells = Array.new(row_size**2, empty_cell_state)
       moves.each { |move| new_cells[move['position']] = move['player'] }
       self.class.new(db: db, state: new_cells)

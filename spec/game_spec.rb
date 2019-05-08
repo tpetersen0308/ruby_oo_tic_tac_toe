@@ -4,22 +4,16 @@ require_relative '../lib/game_io.rb'
 require_relative '../lib/human_player.rb'
 require_relative '../lib/computer_player.rb'
 require_relative '../lib/standard_board.rb'
+require_relative '../lib/lite_board.rb'
+require_relative '../lib/move_database.rb'
 
 RSpec.describe TicTacToe::Game do
   before(:each) do
     @game_io = TicTacToe::GameIO
     @human = TicTacToe::HumanPlayer
     @standard_board = TicTacToe::StandardBoard
-    @db = SQLite3::Database.new(':memory:')
-    @db.execute('DROP TABLE IF EXISTS moves')
-    @db.execute(
-      "CREATE TABLE moves (
-        id INTEGER PRIMARY KEY,
-        player TEXT,
-        position INTEGER
-      )"
-    )
-    @db.results_as_hash = true
+    @lite_board = TicTacToe::LiteBoard
+    @db = MoveDatabase.new
   end
 
   describe 'Human vs. Human game' do
@@ -30,10 +24,9 @@ RSpec.describe TicTacToe::Game do
 
     it 'can execute a turn' do
       board = @standard_board.new(db: @db)
-      @db.execute(
-        "INSERT INTO moves ( player, position )
-        VALUES ( 'X', 0 ), ( 'O', 4 ), ( 'X', 2 )"
-      )
+      @db.add_move('X', 0)
+      @db.add_move('O', 4)
+      @db.add_move('X', 2)
       game = TicTacToe::Game.new(board, [@player2, @player1], @db)
 
       allow(@game_io).to receive(:gets).and_return("2\n")
@@ -58,7 +51,7 @@ RSpec.describe TicTacToe::Game do
     end
 
     it 'can execute a game with Lite3 rules' do
-      board = @standard_board.new(db: @db)
+      board = @lite_board.new(db: @db)
       game = TicTacToe::Game.new(board, [@player1, @player2], @db)
 
       allow(@game_io).to receive(:gets).and_return("1\n", "3\n", "7\n", "4\n", "9\n", "8\n", "5\n", "1\n", "6\n", "7\n", "4\n")
@@ -80,10 +73,9 @@ RSpec.describe TicTacToe::Game do
 
     it 'can execute a turn' do
       board = @standard_board.new(db: @db)
-      @db.execute(
-        "INSERT INTO moves ( player, position )
-        VALUES ( 'X', 0 ), ( 'O', 4 ), ( 'X', 2 )"
-      )
+      @db.add_move('X', 0)
+      @db.add_move('O', 4)
+      @db.add_move('X', 2)
       game = TicTacToe::Game.new(board, [@player2, @player1], @db)
 
       allow(@player2).to receive(:move).and_return(1)
