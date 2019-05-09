@@ -10,10 +10,8 @@ module TicTacToe
     end
 
     def update
-      moves = move_database.last_n_moves(6)
-      new_cells = Array.new(row_size**2, empty_cell_state)
-      moves.each { |move| new_cells[move['position']] = move['player'] }
-      self.class.new(move_database: move_database, state: new_cells)
+      populated_cells = populate_cells(move_database.last_n_moves(6))
+      self.class.new(move_database: move_database, state: populated_cells)
     end
 
     private

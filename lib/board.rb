@@ -26,5 +26,11 @@ module TicTacToe
     private
 
     attr_writer :cells, :row_size, :empty_cell_state
+
+    def populate_cells(moves)
+      new_cells = Array.new(row_size**2, empty_cell_state)
+      moves.each { |move| new_cells[move['position']] = move['player'] }
+      new_cells
+    end
   end
 end
