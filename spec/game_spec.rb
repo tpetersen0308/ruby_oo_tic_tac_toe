@@ -8,7 +8,7 @@ require_relative '../lib/lite_board.rb'
 require_relative '../lib/move_database.rb'
 
 RSpec.describe TicTacToe::Game do
-  let(:database) { MoveDatabase.new }
+  let(:database) { TicTacToe::MoveDatabase.new }
   before(:each) do
     @game_io = TicTacToe::GameIO
     @human = TicTacToe::HumanPlayer
