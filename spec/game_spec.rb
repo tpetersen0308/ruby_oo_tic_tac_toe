@@ -8,12 +8,12 @@ require_relative '../lib/lite_board.rb'
 require_relative '../lib/move_database.rb'
 
 RSpec.describe TicTacToe::Game do
+  let(:database) { MoveDatabase.new }
   before(:each) do
     @game_io = TicTacToe::GameIO
     @human = TicTacToe::HumanPlayer
     @standard_board = TicTacToe::StandardBoard
     @lite_board = TicTacToe::LiteBoard
-    @db = MoveDatabase.new
   end
 
   describe 'Human vs. Human game' do
@@ -23,11 +23,11 @@ RSpec.describe TicTacToe::Game do
     end
 
     it 'can execute a turn' do
-      board = @standard_board.new(move_database: @db)
-      @db.add_move('X', 0)
-      @db.add_move('O', 4)
-      @db.add_move('X', 2)
-      game = TicTacToe::Game.new(board, [@player2, @player1], @db)
+      board = @standard_board.new(move_database: database)
+      database.add_move('X', 0)
+      database.add_move('O', 4)
+      database.add_move('X', 2)
+      game = TicTacToe::Game.new(board, [@player2, @player1], database)
 
       allow(@game_io).to receive(:gets).and_return("2\n")
 
@@ -37,8 +37,8 @@ RSpec.describe TicTacToe::Game do
     end
 
     it 'can execute a game' do
-      board = @standard_board.new(move_database: @db)
-      game = TicTacToe::Game.new(board, [@player1, @player2], @db)
+      board = @standard_board.new(move_database: database)
+      game = TicTacToe::Game.new(board, [@player1, @player2], database)
 
       allow(@game_io).to receive(:gets).and_return("1\n", "5\n", "5\n", "3\n", "2\n", "9\n", "8\n")
       allow(game).to receive(:puts).and_return('')
@@ -51,8 +51,8 @@ RSpec.describe TicTacToe::Game do
     end
 
     it 'can execute a game with Lite3 rules' do
-      board = @lite_board.new(move_database: @db)
-      game = TicTacToe::Game.new(board, [@player1, @player2], @db)
+      board = @lite_board.new(move_database: database)
+      game = TicTacToe::Game.new(board, [@player1, @player2], database)
 
       allow(@game_io).to receive(:gets).and_return("1\n", "3\n", "7\n", "4\n", "9\n", "8\n", "5\n", "1\n", "6\n", "7\n", "4\n")
       allow(game).to receive(:puts).and_return('')
@@ -72,11 +72,11 @@ RSpec.describe TicTacToe::Game do
     end
 
     it 'can execute a turn' do
-      board = @standard_board.new(move_database: @db)
-      @db.add_move('X', 0)
-      @db.add_move('O', 4)
-      @db.add_move('X', 2)
-      game = TicTacToe::Game.new(board, [@player2, @player1], @db)
+      board = @standard_board.new(move_database: database)
+      database.add_move('X', 0)
+      database.add_move('O', 4)
+      database.add_move('X', 2)
+      game = TicTacToe::Game.new(board, [@player2, @player1], database)
 
       allow(@player2).to receive(:move).and_return(1)
 
@@ -86,8 +86,8 @@ RSpec.describe TicTacToe::Game do
     end
 
     it 'can execute a game' do
-      board = @standard_board.new(move_database: @db)
-      game = TicTacToe::Game.new(board, [@player1, @player2], @db)
+      board = @standard_board.new(move_database: database)
+      game = TicTacToe::Game.new(board, [@player1, @player2], database)
 
       allow(@game_io).to receive(:gets).and_return("1\n", 'foo', "5\n", "3\n", 'bar', "9\n")
       allow(@player2).to receive(:move).and_return('5', '2', '8')
