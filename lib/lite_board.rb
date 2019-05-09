@@ -10,7 +10,7 @@ module TicTacToe
     end
 
     def update
-      populated_cells = populate_cells(move_database.last_n_moves(6))
+      populated_cells = populate_cells(move_database.last_n_moves(row_size * 2))
       self.class.new(move_database: move_database, state: populated_cells)
     end
 
